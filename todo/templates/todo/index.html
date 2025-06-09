@@ -1,0 +1,209 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOBLOOM</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gagalin&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background: #87CEEB;
+            font-family: 'Gagalin', cursive;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        .welcome-title {
+            font-family: 'Gagalin', cursive;
+            font-size: 4rem;
+            color: #DC143C;
+            text-align: center;
+            margin-bottom: 3rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: fadeInScale 1.5s ease-out;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 800px;
+            width: 100%;
+        }
+
+        .menu-card {
+            background: white;
+            border: 3px solid #000;
+            border-radius: 20px;
+            padding: 1.2rem 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+        }
+
+        .menu-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .menu-card:hover::before {
+            left: 100%;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+        }
+
+        .menu-text {
+            font-size: 1.2rem;
+            font-weight: bold;
+            font-family: 'Gagalin', cursive;
+            background: linear-gradient(135deg, #FFB6C1 0%, #FF69B4 50%, #FF1493 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: none;
+            position: relative;
+            z-index: 2;
+        }
+
+        .footer {
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
+            text-align: center;
+            padding: 1rem;
+            font-size: 0.9rem;
+            font-family: 'Gagalin', cursive;
+            border-top: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .footer p {
+            margin: 0.2rem 0;
+        }
+
+        @keyframes fadeInScale {
+            0% {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Animation pour les cards */
+        .menu-card {
+            animation: slideInUp 0.8s ease-out forwards;
+            opacity: 0;
+        }
+
+        .menu-card:nth-child(1) { animation-delay: 0.2s; }
+        .menu-card:nth-child(2) { animation-delay: 0.4s; }
+        .menu-card:nth-child(3) { animation-delay: 0.6s; }
+        .menu-card:nth-child(4) { animation-delay: 0.8s; }
+
+        @keyframes slideInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .welcome-title {
+                font-size: 2.5rem;
+                margin-bottom: 2rem;
+            }
+            
+            .menu-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .menu-card {
+                padding: 1rem;
+            }
+            
+            .menu-text {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .welcome-title {
+                font-size: 2rem;
+            }
+            
+            .container {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="welcome-title">Welcome To DOBLOOM</h1>
+        
+        <div class="menu-grid">
+            <a href="{% url 'register' %}" class="menu-card">
+                <div class="menu-text">Register</div>
+            </a>
+            
+            <a href="{% url 'login' %}" class="menu-card">
+                <div class="menu-text">Login to your account</div>
+            </a>
+            
+            <a href="{% url 'about' %}" class="menu-card">
+                <div class="menu-text">About Us</div>
+            </a>
+            
+            <a href="{% url 'contact' %}" class="menu-card">
+                <div class="menu-text">Contact Us</div>
+            </a>
+        </div>
+    </div>
+    
+    <footer class="footer">
+        <p>&copy; 2025 DOBLOOM. All rights reserved.</p>
+        <p>Created by Melek Jemili</p>
+    </footer>
+</body>
+</html>

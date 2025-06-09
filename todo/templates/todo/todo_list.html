@@ -1,0 +1,228 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>What's for today?</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
+    <style>
+        /* Import Google Fonts - Gagalin */
+        @import url('https://fonts.googleapis.com/css2?family=Gagalin&display=swap');
+
+        /* Reset et styles de base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #87CEEB 0%, #4682B4 100%);
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Titre principal "Welcome back...!" */
+        .welcome-title {
+            font-family: 'Gagalin', cursive;
+            color: #FF0000;
+            font-size: 2.5rem;
+            text-align: center;
+            margin: 2rem 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        /* Conteneur principal */
+        .main-container {
+            flex: 1;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            width: 100%;
+        }
+
+        /* Cadre blanc pour les todos */
+        .todos-container {
+            background: white;
+            border: 3px solid black;
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            min-height: 300px;
+        }
+
+        /* Liste des todos */
+        .todo-list {
+            list-style: none;
+        }
+
+        .todo-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            margin-bottom: 0.5rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .todo-text {
+            color: black;
+            font-size: 1.1rem;
+            flex: 1;
+        }
+
+        /* Boutons Edit et Delete */
+        .todo-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .edit-btn, .delete-btn {
+            background: linear-gradient(135deg, #FFB6C1 0%, #FFC0CB 100%);
+            border: none;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            color: #FF69B4;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .edit-btn:hover, .delete-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 2px 8px rgba(255, 182, 193, 0.4);
+        }
+
+        /* Bouton Add Todo */
+        .add-todo-btn {
+            background: linear-gradient(135deg, #FFB6C1 0%, #FFC0CB 100%);
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            font-family: 'Gagalin', cursive;
+            color: #FF0000;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: block;
+            margin: 2rem auto;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 182, 193, 0.3);
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .add-todo-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 182, 193, 0.5);
+        }
+
+        /* Bouton Logout */
+        .logout-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 15px;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            margin: 1rem auto;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .logout-btn:hover {
+            background: white;
+            color: #4682B4;
+        }
+
+        /* Footer blanc fin */
+        .footer {
+            background: white;
+            color: #333;
+            text-align: center;
+            padding: 1rem;
+            margin-top: auto;
+            font-size: 0.9rem;
+            border-top: 1px solid #eee;
+        }
+
+        /* Message quand aucun todo */
+        .no-todos {
+            text-align: center;
+            color: #666;
+            font-style: italic;
+            padding: 2rem;
+            font-size: 1.1rem;
+        }
+
+        /* Conteneur pour centrer le bouton logout */
+        .logout-container {
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .welcome-title {
+                font-size: 2rem;
+            }
+            
+            .main-container {
+                padding: 0 0.5rem;
+            }
+            
+            .todos-container {
+                padding: 1.5rem;
+            }
+            
+            .todo-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+            
+            .todo-actions {
+                align-self: flex-end;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <h2 class="welcome-title">Welcome back, {{ request.user.username }}!</h2>
+        
+        <div class="todos-container">
+            <ul class="todo-list">
+                {% for todo in todos %}
+                    <li class="todo-item">
+                        <span class="todo-text">{{ todo.title }} - {{ todo.created_at }}</span>
+                        <div class="todo-actions">
+                            <a href="{% url 'edit_todo' todo.pk %}" class="edit-btn">Edit</a>
+                            <a href="{% url 'delete_todo' todo.pk %}" class="delete-btn">Delete</a>
+                        </div>
+                    </li>
+                {% empty %}
+                    <li class="no-todos">No todos found for this user.</li>
+                {% endfor %}
+            </ul>
+        </div>
+        
+        <a href="{% url 'add_todo' %}" class="add-todo-btn">Add Todo</a>
+        
+        <div class="logout-container">
+            <a href="{% url 'login' %}" class="logout-btn">Logout</a>
+        </div>
+    </div>
+    
+    <footer class="footer">
+        <p>&copy; 2025 DOBLOOM. All rights reserved.</p>
+        <p>Created by Melek Jemili</p>
+    </footer>
+</body>
+</html>

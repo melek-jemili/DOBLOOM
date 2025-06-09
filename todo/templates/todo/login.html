@@ -1,0 +1,252 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - DOBLOOM</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gagalin&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #87CEEB 0%, #ADD8E6 50%, #B0E0E6 100%);
+            font-family: 'Gagalin', cursive;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        .container > h1 {
+            font-family: 'Gagalin', cursive;
+            font-size: 3rem;
+            color: #DC143C;
+            text-align: center;
+            margin-bottom: 2rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            animation: fadeInScale 1s ease-out;
+        }
+
+        form {
+            background: linear-gradient(135deg, #FFB6C1 0%, #FFC0CB 50%, #FFCCCB 100%);
+            border-radius: 30px;
+            padding: 3rem 2.5rem;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            width: 100%;
+            max-width: 450px;
+            animation: slideInScale 1s ease-out;
+        }
+
+        /* Styling pour les paragraphes générés par Django form.as_p */
+        form p {
+            margin-bottom: 1.5rem;
+        }
+
+        form label {
+            display: block;
+            font-family: 'Gagalin', cursive;
+            font-size: 1.1rem;
+            color: #000;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        form input[type="text"],
+        form input[type="email"], 
+        form input[type="password"] {
+            width: 100%;
+            padding: 1rem;
+            border: 3px solid #000;
+            border-radius: 12px;
+            background: #fff;
+            font-size: 1rem;
+            font-family: 'Gagalin', cursive;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        form input:focus {
+            border-color: #DC143C;
+            box-shadow: 0 0 10px rgba(220, 20, 60, 0.3);
+            transform: translateY(-2px);
+        }
+
+        form input::placeholder {
+            color: #999;
+            font-family: 'Gagalin', cursive;
+        }
+
+        /* Styling pour les messages d'aide Django */
+        .helptext {
+            font-size: 0.85rem;
+            color: #333;
+            margin-top: 0.3rem;
+            font-family: 'Gagalin', cursive;
+        }
+
+        /* Styling pour les erreurs Django */
+        .errorlist {
+            list-style: none;
+            color: #DC143C;
+            font-size: 0.9rem;
+            margin-top: 0.3rem;
+            font-family: 'Gagalin', cursive;
+        }
+
+        button[type="submit"] {
+            width: 100%;
+            padding: 1.2rem;
+            background: #fff;
+            border: 3px solid #000;
+            border-radius: 15px;
+            font-family: 'Gagalin', cursive;
+            font-size: 1.3rem;
+            color: #DC143C;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+            text-transform: uppercase;
+        }
+
+        button[type="submit"]:hover {
+            background: #f8f8f8;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        button[type="submit"]:active {
+            transform: translateY(-1px);
+        }
+
+        .back {
+            display: inline-block;
+            margin-top: 1.5rem;
+            font-family: 'Gagalin', cursive;
+            color: #DC143C;
+            text-decoration: none;
+            font-size: 1rem;
+            background: rgba(255,255,255,0.8);
+            padding: 0.8rem 1.5rem;
+            border-radius: 20px;
+            border: 2px solid #000;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .back:hover {
+            background: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        footer {
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
+            text-align: center;
+            padding: 1rem;
+            font-size: 0.9rem;
+            font-family: 'Gagalin', cursive;
+            border-top: 1px solid rgba(0,0,0,0.1);
+        }
+
+        footer p {
+            margin: 0.2rem 0;
+        }
+
+        @keyframes fadeInScale {
+            0% {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes slideInScale {
+            0% {
+                opacity: 0;
+                transform: scale(0.9) translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            form {
+                padding: 2rem 1.5rem;
+                margin: 1rem;
+            }
+            
+            .container > h1 {
+                font-size: 2.5rem;
+                margin-bottom: 1.5rem;
+            }
+            
+            form label {
+                font-size: 1rem;
+            }
+            
+            button[type="submit"] {
+                font-size: 1.1rem;
+                padding: 1rem;
+            }
+            
+            .back {
+                font-size: 0.9rem;
+                padding: 0.6rem 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container > h1 {
+                font-size: 2rem;
+            }
+            
+            .container {
+                padding: 1rem;
+            }
+            
+            form {
+                padding: 1.5rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Login</h1>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Login</button>
+    </form>
+    <a class="back" href="{% url 'register' %}">Don't have an account? Sign up</a>
+</div>
+<footer>
+        <p>&copy; 2025 DOBLOOM. All rights reserved.</p>
+        <p>Created by Melek Jemili</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,243 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Delete Task</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
+    <style>
+        /* Import de la police Gagalin */
+        @import url('https://fonts.googleapis.com/css2?family=Gagalin&display=swap');
+
+        /* Reset et base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Page Delete Todo - DoBloom */
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #87CEEB 0%, #87CEFA 50%, #B0E0E6 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            font-family: 'Gagalin', cursive;
+        }
+
+        /* Conteneur principal */
+        .delete-container {
+            max-width: 500px;
+            width: 100%;
+            background: linear-gradient(135deg, #FFB6C1 0%, #FFC0CB 50%, #FFCCCB 100%);
+            border-radius: 25px;
+            padding: 40px 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        /* Titre principal */
+        h1 {
+            font-family: 'Gagalin', cursive;
+            font-size: 2.5rem;
+            color: #DC143C;
+            margin-bottom: 25px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Message de confirmation */
+        p {
+            background: white;
+            border: 2px solid #000;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            font-family: 'Gagalin', cursive;
+            color: #000;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        /* Style pour le titre de la tâche dans le message */
+        p strong {
+            color: #DC143C;
+        }
+
+        /* Conteneur des boutons */
+        .button-container {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+
+        /* Bouton de confirmation (danger) */
+        button[type="submit"] {
+            background: linear-gradient(135deg, #DC143C 0%, #B22222 100%);
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 10px;
+            font-family: 'Gagalin', cursive;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(220, 20, 60, 0.3);
+            min-width: 150px;
+        }
+
+        button[type="submit"]:hover {
+            background: linear-gradient(135deg, #B22222 0%, #8B0000 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(220, 20, 60, 0.4);
+        }
+
+        button[type="submit"]:active {
+            transform: translateY(0);
+        }
+
+        /* Lien Cancel */
+        a {
+            display: inline-block;
+            background: white;
+            color: #666;
+            text-decoration: none;
+            padding: 15px 25px;
+            border-radius: 10px;
+            font-family: 'Gagalin', cursive;
+            font-size: 1.1rem;
+            border: 2px solid #ccc;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            min-width: 150px;
+            text-align: center;
+        }
+
+        a:hover {
+            background: #f5f5f5;
+            border-color: #999;
+            color: #333;
+            transform: translateY(-1px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Mise en page mobile pour les boutons */
+        @media (max-width: 480px) {
+            .button-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            button[type="submit"],
+            a {
+                width: 100%;
+                max-width: 200px;
+            }
+        }
+
+        /* Wrapper pour centrer le contenu */
+        .content-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            justify-content: center;
+        }
+
+        /* Footer fin */
+        footer {
+            background: none;
+            color: #666;
+            text-align: center;
+            padding: 15px 20px;
+            font-size: 0.8rem;
+            font-family: 'Gagalin', cursive;
+            margin-top: auto;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        footer p {
+            margin: 5px 0;
+            color: #666;
+            font-size: 0.8rem;
+            background: none;
+            border: none;
+            padding: 0;
+            box-shadow: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .delete-container {
+                margin: 10px;
+                padding: 30px 20px;
+                max-width: 90%;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            p {
+                padding: 15px;
+                font-size: 1rem;
+            }
+
+            button[type="submit"],
+            a {
+                font-size: 1rem;
+                padding: 12px 20px;
+            }
+
+            footer {
+                max-width: 90%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .delete-container {
+                padding: 25px 15px;
+            }
+
+            p {
+                padding: 12px;
+                font-size: 0.9rem;
+            }
+
+            button[type="submit"],
+            a {
+                font-size: 0.9rem;
+                padding: 10px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="content-wrapper">
+        <div class="delete-container">
+            <h1>Delete Todo</h1>
+            <p>Are you sure you want to delete "<strong>{{ todo.title }}</strong>"?</p>
+            <div class="button-container">
+                <form method="POST" style="display: inline;">{% csrf_token %}
+                    <button type="submit">Confirm Delete</button>
+                </form>
+                <a href="{% url 'todo_list' %}">Cancel</a>
+            </div>
+        </div>
+        <footer>
+            <p>&copy; 2025 DOBLOOM. All rights reserved.</p>
+            <p>Created by Melek Jemili</p>
+        </footer>
+    </div>
+</body>
+</html>

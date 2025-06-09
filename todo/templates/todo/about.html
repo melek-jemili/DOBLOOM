@@ -1,0 +1,160 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Good To Know Us!</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
+    <style>
+        /* Import de la police Gagalin */
+        @import url('https://fonts.googleapis.com/css2?family=Gagalin&display=swap');
+
+        /* Reset et base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Page About Us - DoBloom */
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #87CEEB 0%, #87CEFA 50%, #B0E0E6 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            font-family: 'Gagalin', cursive;
+        }
+
+        /* Conteneur principal centré */
+        .container {
+            max-width: 700px;
+            width: 100%;
+            background: linear-gradient(135deg, #FFB6C1 0%, #FFC0CB 50%, #FFCCCB 100%);
+            border-radius: 25px;
+            padding: 40px 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        /* Titre "About Us" */
+        .container h1 {
+            font-family: 'Gagalin', cursive;
+            font-size: 2.5rem;
+            color: #DC143C;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Cadre blanc pour le texte */
+        .container p {
+            background: white;
+            border: 2px solid #000;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            font-family: 'Gagalin', cursive;
+            color: #000;
+            font-size: 1rem;
+            line-height: 1.6;
+            text-align: left;
+        }
+
+        /* Style pour les liens */
+        .container a {
+            color: #DC143C;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .container a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer fin */
+        footer {
+            background: white;
+            color: #666;
+            text-align: center;
+            padding: 15px 20px;
+            font-size: 0.8rem;
+            font-family: 'Gagalin', cursive;
+            margin-top: auto;
+            width: 100%;
+            max-width: 700px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        footer p {
+            margin: 5px 0;
+            background: none;
+            border: none;
+            padding: 0;
+            box-shadow: none;
+            color: #666;
+            font-size: 0.8rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                padding: 30px 20px;
+                max-width: 90%;
+            }
+            
+            .container h1 {
+                font-size: 2rem;
+            }
+            
+            .container p {
+                font-size: 0.9rem;
+                padding: 20px;
+            }
+
+            footer {
+                max-width: 90%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container h1 {
+                font-size: 1.8rem;
+            }
+            
+            .container p {
+                padding: 15px;
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>About Us</h1>
+        <p>
+           Welcome to DOBLOOM ! your personal space to organize, prioritize, and conquer your daily goals.
+
+We created this app with simplicity and efficiency in mind. Whether you're a student juggling assignments, a professional tracking deadlines, or just someone who wants to stay organized, DOBLOOM helps you take control of your to-do list — one task at a time.
+
+👤 Each user has their own private space — just sign up, log in, and start building your list. Your tasks are securely saved and always accessible.
+✅ Add, edit, delete, and complete tasks with ease.
+🎯 Stay focused on what matters most to you.
+
+DOBLOOM is more than just a to-do app — it's your daily companion for better productivity.
+        </p>
+        <p>
+            <strong>Contact Us:</strong> If you have any questions, feedback, or suggestions, feel free to reach out to us at <a href="mailto:melekjemili.116@gmail.com">Send Us Mail</a>.
+        </p>
+    </div>
+    <footer>
+        <p>&copy; 2025 DOBLOOM. All rights reserved.</p>
+        <p>Created by Melek Jemili</p>
+    </footer>
+</body>
+</html>
